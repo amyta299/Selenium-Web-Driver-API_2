@@ -4,6 +4,9 @@ import org.testng.annotations.Test;
 
 import org.testng.annotations.BeforeClass;
 import org.testng.annotations.BeforeMethod;
+
+import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.WebDriver;
 import org.openqa.selenium.firefox.FirefoxDriver;
@@ -27,11 +30,14 @@ public class Exercise_Topic_03 {
 	  driver.get("http://live.guru99.com/index.php/customer/account/login/");
 	  
 	  driver.findElement(By.linkText("MY ACCOUNT")).click();
+	  //or driver.findElement(By.xpath("//div[@class='footer']//a[text()='My Account']")).click();
 	  
 	  String logInPageUrl= driver.getCurrentUrl();
 	  Assert.assertEquals(logInPageUrl, "http://live.demoguru99.com/index.php/customer/account/login/");
 	  
 	  driver.findElement(By.linkText("CREATE AN ACCOUNT")).click();
+	  //or driver.findElement(By.xpath("//a[title@='Create an account']")).click();
+	  
 	  String registerPageUrl= driver.getCurrentUrl();
 	  Assert.assertEquals(registerPageUrl, "http://live.demoguru99.com/index.php/customer/account/create/");
 	  
@@ -45,6 +51,7 @@ public class Exercise_Topic_03 {
 	  driver.get("http://live.guru99.com/index.php/customer/account/login/");
 	 
 	  driver.findElement(By.linkText("MY ACCOUNT")).click();
+	  driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	  String logInPageTitle= driver.getTitle();
 	  Assert.assertEquals(logInPageTitle, "Customer Login");
 	  
@@ -59,7 +66,9 @@ public class Exercise_Topic_03 {
 	  driver.get("http://live.guru99.com");
 	  
 	  driver.findElement(By.linkText("MY ACCOUNT")).click();
+	  driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	  driver.findElement(By.linkText("CREATE AN ACCOUNT")).click();
+	  driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 	  String registerPageUrl= driver.getCurrentUrl();
 	  Assert.assertEquals(registerPageUrl, "http://live.demoguru99.com/index.php/customer/account/create/");
 	  
@@ -81,13 +90,17 @@ public class Exercise_Topic_03 {
 	  driver.get("http://live.guru99.com");
 	  
 	  driver.findElement(By.linkText("MY ACCOUNT")).click();
-	  String logInPageSourceCode= driver.getCurrentUrl();
-	  Assert.assertFalse(logInPageSourceCode.contains("Log in or Create an Account"));
+	  driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	  String logInPageSourceCode= driver.getPageSource();
+	  
+	  //Assert.assertTrue(driver.findElement(By.xpath("//form[@id='log-in form']")).isDisplayed());
+	  Assert.assertTrue(logInPageSourceCode.contains("Log in or Create an Account"));
 	  
 	  driver.findElement(By.linkText("CREATE AN ACCOUNT")).click();
-	  String registerPageSourceCode= driver.getCurrentUrl();
-	  Assert.assertFalse(registerPageSourceCode.contains("Create an Account"));
-	  
+	  driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
+	  String registerPageSourceCode= driver.getPageSource();
+	  Assert.assertTrue(registerPageSourceCode.contains("Create an Account"));
+
 	  
   }
   

@@ -17,7 +17,7 @@ public class Topic_01_Check_Environment {
 
 	@BeforeClass
 	public void beforeClass() {
-		// Run on Chrome version  80.0.3987.16
+		// Run on Chrome headless version  80.0.3987.87 + Chrome Driver 80.0.3987.16
 		System.setProperty("webdriver.chrome.driver", 
 			"C:\\Users\\DMedcal1\\OneDrive - Greene King PLC\\Desktop\\MAI\\selenium webdriver api\\src\\selenium-webdriver-api\\libraries\\chromedriver.exe");
 		    
