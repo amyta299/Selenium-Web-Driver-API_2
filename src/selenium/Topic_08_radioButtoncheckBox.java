@@ -48,7 +48,7 @@ public class Topic_08_radioButtoncheckBox {
 	  Assert.assertTrue(isRadioOrCheckboxSelected("//input[@id='eq5']"));
 	  
 	  uncheckToCheckboxRadio ("//input[@id='eq5']");
-	  Assert.assertTrue(isRadioOrCheckboxSelected("//input[@id='eq5']"));
+	  Assert.assertFalse(isRadioOrCheckboxSelected("//input[@id='eq5']"));
 	  
   }
   
